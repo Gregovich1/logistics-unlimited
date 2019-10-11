@@ -1,0 +1,26 @@
+{
+  "name": "logistics-unlimited.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-generator": "^4.16.1",
+    "handlebars": "^4.4.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gregovich1/logistics-unlimited.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gregovich1/logistics-unlimited.github.io/issues"
+  },
+  "homepage": "https://github.com/Gregovich1/logistics-unlimited.github.io#readme"
+}
