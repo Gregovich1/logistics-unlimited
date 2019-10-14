@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-generator": "^4.16.1",
-    "handlebars": "^4.4.3"
+    "handlebars": "^4.4.3",
+    "hbs": "^4.0.6"
   },
   "devDependencies": {},
   "scripts": {
@@ -15,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Gregovich1/logistics-unlimited.github.io.git"
+    "url": "git+https://github.com/Gregovich1/logistics-unlimited.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Gregovich1/logistics-unlimited.github.io/issues"
+    "url": "https://github.com/Gregovich1/logistics-unlimited/issues"
   },
-  "homepage": "https://github.com/Gregovich1/logistics-unlimited.github.io#readme"
+  "homepage": "https://github.com/Gregovich1/logistics-unlimited#readme"
 }
