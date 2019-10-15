@@ -32,6 +32,8 @@
           <button type="button" onclick="signIn()">Sign in</button>
     
         </form>
+        <script src="/src/app.js"></script>
+        <script src="/public/js/vendor/bootstrap.min.js"></script>
     </body>
     <script>
         function signIn() {
@@ -51,20 +53,20 @@
         }
         const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData)
         cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: function (result) {
-            const accessToken = result.getAccessToken().getJwtToken()
-            window.location.href = 'user.html'
-        },
-        onFailure: function(err) {
-            alert(err.message || JSON.stringify(err))
-        },
-        newPasswordRequired: function(userAttributes, requiredAttributes) {
-            delete userAttributes.email_verified
-            let newPassword = prompt('A new password is required!')
-            cognitoUser.completeNewPasswordChallenge(newPassword, userAttributes, this)
-        }
-    })
-  }
+            onSuccess: function (result) {
+                const accessToken = result.getAccessToken().getJwtToken()
+                window.location.href = 'profile.html'
+            },
+            onFailure: function(err) {
+                alert(err.message || JSON.stringify(err))
+            },
+            newPasswordRequired: function(userAttributes, requiredAttributes) {
+                delete userAttributes.email_verified
+                let newPassword = prompt('A new password is required!')
+                cognitoUser.completeNewPasswordChallenge(newPassword, userAttributes, this)
+            }
+        })
+    }
     </script>
     
 </html>

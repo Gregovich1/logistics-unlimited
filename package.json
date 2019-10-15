@@ -2,12 +2,14 @@
   "name": "logistics-unlimited.github.io",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-generator": "^4.16.1",
     "handlebars": "^4.4.3",
-    "hbs": "^4.0.6"
+    "hbs": "^4.0.6",
+    "mysql": "^2.17.1"
   },
   "devDependencies": {},
   "scripts": {

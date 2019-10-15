@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const mysql = require('mysql')
 
 const app = express()
 
@@ -15,6 +16,7 @@ hbs.registerPartials(partialsPath)
 
 app.use(express.static(publicDirectoryPath))
 
+// route handlers. add properties if desired
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Logistics Unlimited'
@@ -24,6 +26,12 @@ app.get('', (req, res) => {
 app.get('/signin', (req, res) => {
     res.render('signin', {
         title: 'Logistics Unlimited'
+    })
+})
+
+app.get('/profile', (req, res) => {
+    res.render('profile.hbs', {
+        title: 'My Profile'
     })
 })
 

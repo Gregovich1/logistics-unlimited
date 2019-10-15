@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Logistics Unlimited</title>
+        {{!-- <link rel="icon" href=""> --}}
+        <link rel= "stylesheet" href="/public/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="">
+            {{>header}}
+        </div>
+        {{>footer}}
+        <script src="/src/app.js"></script>
+        <script src="/public/js/vendor/bootstrap.min.js"></script>
+        <script>
+	        const data = { 
+		        UserPoolId : _config.cognito.userPoolId,
+                ClientId : _config.cognito.clientId
+            }
+            const userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+            const cognitoUser = userPool.getCurrentUser();
+	        window.onload = function() {
+                if (cognitoUser != null) {
+                    cognitoUser.getSession(function(err, session) {
+                        if (err) {
+                            alert(err)
+                            return
+                        }
+                        console.log('session validity: ' + session.isValid())
+			            //Set the profile info
+			            cognitoUser.getUserAttributes(function(err, result) {
+				        if (err) {
+					        console.log(err)
+					        return
+				        }
+				        console.log(result)
+				        document.getElementById("email_value").innerHTML = result[2].getValue()	
+			            })			
+                    })
+                }
+            }
+	        function signOut(){
+	            if (cognitoUser != null) {
+                    cognitoUser.signOut();	  
+                }
+	        }
+        </script>
+    </body>
+</html>
