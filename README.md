@@ -1,7 +1,7 @@
 # logistics-unlimited
 
 To set up your development environment:
-1. Make sure you have Git installed.
+1. Make sure you have Git installed. (Update) You should also install Node.js.
 2. Download the repository and open in project in Visual Studio Code.
 3. Open the integrated terminal.
 4. If using Windows, change the environment from Powershell to Bash.
