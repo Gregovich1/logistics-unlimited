@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
-const mysql = require('mysql')
+const sql = require('mssql')
 
 const app = express()
 
@@ -15,6 +15,25 @@ app.set('view engine', 'hbs')
 hbs.registerPartials(partialsPath)
 
 app.use(express.static(publicDirectoryPath))
+
+const config = {
+    user: 'admin',
+    password: 'capstone1',
+    server: 'database-1.ctrqljmft4jn.us-east-1.rds.amazonaws.com',
+    database: 'database-1'
+}
+
+sql.connect(config).then(pool => {
+    // Query
+    return pool.request()
+    .input('input_parameter', sql.Int, value)
+    .query('select * from mytable where id = @input_parameter')
+}).then(result => {
+    console.dir(result)
+    // Stored procedure
+    return pool.request()
+
+})
 
 // route handlers. add properties if desired
 app.get('', (req, res) => {
