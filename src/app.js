@@ -1,7 +1,8 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
-const sql = require('mssql')
+const bodyparser = require('body-parser')
+// const sql = require('mssql')
 
 const app = express()
 
@@ -12,28 +13,10 @@ const partialsPath = path.join(__dirname, '../templates/partials')
 
 app.set('views', viewspath)
 app.set('view engine', 'hbs')
+app.use(bodyparser.urlencoded( {extended: true} ))
 hbs.registerPartials(partialsPath)
 
 app.use(express.static(publicDirectoryPath))
-
-const config = {
-    user: 'admin',
-    password: 'capstone1',
-    server: 'database-1.ctrqljmft4jn.us-east-1.rds.amazonaws.com',
-    database: 'database-1'
-}
-
-sql.connect(config).then(pool => {
-    // Query
-    return pool.request()
-    .input('input_parameter', sql.Int, value)
-    .query('select * from mytable where id = @input_parameter')
-}).then(result => {
-    console.dir(result)
-    // Stored procedure
-    return pool.request()
-
-})
 
 // route handlers. add properties if desired
 app.get('', (req, res) => {
@@ -48,8 +31,14 @@ app.get('/signin', (req, res) => {
     })
 })
 
+app.post('/signin', (req, res) => {
+    console.log('submitted')
+    console.log(req.body)
+    res.redirect('profile')
+})
+
 app.get('/profile', (req, res) => {
-    res.render('profile.hbs', {
+    res.render('profile', {
         title: 'My Profile'
     })
 })

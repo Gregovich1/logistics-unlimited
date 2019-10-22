@@ -4,18 +4,20 @@ const config = {
     user: 'admin',
     password: 'capstone1',
     server: 'database-1.ctrqljmft4jn.us-east-1.rds.amazonaws.com',
-    database: 'database-1'
+    database: 'Logistics_Unlimited',
 }
 
-sql.connect(config).then(pool => {
-    // Query
-    return pool.request()
-    .input('input_parameter', sql.Int, value)
-    .query('select * from trucks')
+sql.connect(config).then(() => {
+    return sql.query('select * from Trucks ')
 }).then(result => {
-    console.log(result)
-    // Stored procedure
-    return pool.request()
-}).catch((e) => {
-    console.log(e)
+    console.log('It did not fail')
+    console.log(result.recordsets)
+}).catch(err => {
+    console.log('got an error')
+    console.log(typeof(err))
+    console.log(err)
+})
+ 
+sql.on('error', err => {
+    console.log(err)
 })
