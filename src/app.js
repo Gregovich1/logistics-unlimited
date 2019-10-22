@@ -31,11 +31,11 @@ app.get('/signin', (req, res) => {
     })
 })
 
-app.post('/signin', (req, res) => {
-    console.log('submitted')
-    console.log(req.body)
-    res.redirect('profile')
-})
+// app.post('/signin', (req, res) => {
+//     // console.log('submitted')
+//     // console.log(req.body)
+//     // res.redirect('profile')
+// })
 
 app.get('/profile', (req, res) => {
     res.render('profile', {
