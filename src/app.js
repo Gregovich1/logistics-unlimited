@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 const bodyparser = require('body-parser')
-// const sql = require('mssql')
+const sql = require('mssql')
 
 const app = express()
 
@@ -25,18 +25,34 @@ app.get('', (req, res) => {
     })
 })
 
-app.get('/signin', (req, res) => {
-    res.render('signin', {
+app.get('/users', (req, res) => {
+    res.render('users', {
         title: 'Logistics Unlimited'
     })
 })
-
-// app.post('/signin', (req, res) => {
-//     // console.log('submitted')
-//     // console.log(req.body)
-//     // res.redirect('profile')
-// })
-
+app.get('/trucks', (req, res) => {
+    const config = {
+        user: 'admin',
+        password: 'capstone1',
+        server: 'database-1.ctrqljmft4jn.us-east-1.rds.amazonaws.com',
+        database: 'Logistics_Unlimited',
+    }
+    
+    sql.connect(config).then(() => {
+        return sql.query('select * from Trucks ')
+    }).then(result => {
+        console.log('It did not fail')
+        res.send(result.recordsets)
+    }).catch(err => {
+        console.log('got an error')
+        console.log(typeof(err))
+        console.log(err)
+    })
+     
+    sql.on('error', err => {
+        console.log(err)
+    })
+})
 app.get('/profile', (req, res) => {
     res.render('profile', {
         title: 'My Profile'
