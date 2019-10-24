@@ -30,27 +30,28 @@ app.get('/users', (req, res) => {
         title: 'Logistics Unlimited'
     })
 })
+
 app.get('/trucks', (req, res) => {
+    res.render('trucks')
+})
+
+app.get('/trucks/all', (req, res) => {
     const config = {
         user: 'admin',
         password: 'capstone1',
         server: 'database-1.ctrqljmft4jn.us-east-1.rds.amazonaws.com',
-        database: 'Logistics_Unlimited',
+        database: 'Logistics_Unlimited'
     }
-    
     sql.connect(config).then(() => {
         return sql.query('select * from Trucks ')
     }).then(result => {
         console.log('It did not fail')
         res.send(result.recordsets)
     }).catch(err => {
-        console.log('got an error')
-        console.log(typeof(err))
-        console.log(err)
-    })
-     
+        res.send(err)
+    })    
     sql.on('error', err => {
-        console.log(err)
+        res.send(err)
     })
 })
 app.get('/profile', (req, res) => {

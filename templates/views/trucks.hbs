@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="/js/vendor/jquery-3.1.0.js"></script>
+        <script src="/js/vendor/bootstrap.min.js"></script>
+        <script src="/js/vendor/aws-cognito-sdk.min.js"></script>
+        <script src="/js/vendor/amazon-cognito-identity.min.js"></script>
+        <script src="/js/config.js"></script>
+        <script src="/js/cognito-auth.js"></script>
+        <style>
+            th, td, p, input {
+                font:14px Verdana;
+            }
+            table, th, td 
+            {
+                border: solid 1px #DDD;
+                border-collapse: collapse;
+                padding: 2px 3px;
+                text-align: center;
+            }
+            th {
+                font-weight:bold;
+            }
+    </style>
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    </head>
+    <body>
+        <div class="container fixed-top" style="width: 768px;">
+            {{> header }}
+            <br><br><br><br><br><br><br><br>
+            <div class="row">
+                <p></p>
+            </div>
+            <div class="row">
+                <p></p>
+            </div>
+            <div class="row">
+                <p></p>
+            </div>
+            <div class="jumbotron mx-auto" style="width: 480px; background-color: whitesmoke;">
+            </div>
+            <div id="trucks">
+
+            </div>
+        </div>
+        <script src="/public/js/vendor/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+    <script>
+        //sample data--delete if query to real db works
+        const trucks = [
+            [
+                {
+                "truck_id": 0,
+                "truck_year": 1987,
+                "truck_make": "Volvo",
+                "truck_model": "SEL 1100",
+                "license_plate": null,
+                "truck_employee": "Markus"
+                },
+                {
+                "truck_id": 1,
+                "truck_year": 1987,
+                "truck_make": "Volvo",
+                "truck_model": "SEL 1200",
+                "license_plate": null,
+                "truck_employee": "Markus"
+                },
+                {
+                "truck_id": 2,
+                "truck_year": 1987,
+                "truck_make": "Volvo",
+                "truck_model": "SEL 1300",
+                "license_plate": null,
+                "truck_employee": "Markus"
+                },
+                {
+                "truck_id": 3,
+                "truck_year": 1987,
+                "truck_make": "Volvo",
+                "truck_model": "SEL 1400",
+                "license_plate": null,
+                "truck_employee": "Markus"
+                },
+                {
+                "truck_id": 4,
+                "truck_year": 1987,
+                "truck_make": "Volvo",
+                "truck_model": "SEL 1500",
+                "license_plate": null,
+                "truck_employee": "Markus"
+                }
+            ]
+        ]
+        window.addEventListener('DOMContentLoaded', (e) => {
+            e.preventDefault()
+            
+            fetch('/trucks/all').then((response) => {
+                response.json().then((data) => {
+                    if (data.error) {
+
+                    } else {
+                        document.getElementById('trucks').appendChild(createTable(data[0]))
+                    }
+                })
+            })
+        })
+        const createTable = (data) => {
+            let col = [];
+            for (let i = 0; i < data.length; i++) {
+                for (let key in data[i]) {
+                    if (col.indexOf(key) === -1) {
+                        col.push(key)
+                    }
+                }
+            }
+            const table = document.createElement('table')
+            let tr = table.insertRow(-1)                 // TABLE ROW.
+            for (let i = 0; i < col.length; i++) {
+                let th = document.createElement("th")     // TABLE HEADER.
+                th.innerHTML = col[i]
+                tr.appendChild(th)
+            }
+            for (let i = 0; i < data.length; i++) {
+                tr = table.insertRow(-1)
+                for (let j = 0; j < col.length; j++) {
+                    let tabCell = tr.insertCell(-1)
+                    tabCell.innerHTML = data[i][col[j]]
+                }
+            }
+            return table
+        }
+    </script>
+    
+</html>

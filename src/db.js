@@ -21,3 +21,12 @@ sql.connect(config).then(() => {
 sql.on('error', err => {
     console.log(err)
 })
+
+const selectAll = (config, table) => {
+
+}
+
+const getUserId = (config, table) => {
+
+}
+
