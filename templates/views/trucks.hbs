@@ -38,19 +38,9 @@
         <div class="container fixed-top" style="width: 768px;">
             {{> header }}
             <br><br><br><br><br><br><br><br>
-            <div class="row">
-                <p></p>
-            </div>
-            <div class="row">
-                <p></p>
-            </div>
-            <div class="row">
-                <p></p>
-            </div>
             <div class="jumbotron mx-auto" style="width: 480px; background-color: whitesmoke;">
-            </div>
-            <div id="trucks">
-
+                <div id="trucks">
+                </div>
             </div>
         </div>
         <script src="/public/js/vendor/bootstrap.min.js"></script>
@@ -59,60 +49,15 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
     <script>
-        //sample data--delete if query to real db works
-        const trucks = [
-            [
-                {
-                "truck_id": 0,
-                "truck_year": 1987,
-                "truck_make": "Volvo",
-                "truck_model": "SEL 1100",
-                "license_plate": null,
-                "truck_employee": "Markus"
-                },
-                {
-                "truck_id": 1,
-                "truck_year": 1987,
-                "truck_make": "Volvo",
-                "truck_model": "SEL 1200",
-                "license_plate": null,
-                "truck_employee": "Markus"
-                },
-                {
-                "truck_id": 2,
-                "truck_year": 1987,
-                "truck_make": "Volvo",
-                "truck_model": "SEL 1300",
-                "license_plate": null,
-                "truck_employee": "Markus"
-                },
-                {
-                "truck_id": 3,
-                "truck_year": 1987,
-                "truck_make": "Volvo",
-                "truck_model": "SEL 1400",
-                "license_plate": null,
-                "truck_employee": "Markus"
-                },
-                {
-                "truck_id": 4,
-                "truck_year": 1987,
-                "truck_make": "Volvo",
-                "truck_model": "SEL 1500",
-                "license_plate": null,
-                "truck_employee": "Markus"
-                }
-            ]
-        ]
         window.addEventListener('DOMContentLoaded', (e) => {
             e.preventDefault()
             
-            fetch('/trucks/all').then((response) => {
+            fetch('/api/trucks').then((response) => {
                 response.json().then((data) => {
                     if (data.error) {
 
                     } else {
-                        document.getElementById('trucks').appendChild(createTable(data[0]))
+                        document.getElementById('trucks').appendChild(createTable(data))
                     }
                 })
             })

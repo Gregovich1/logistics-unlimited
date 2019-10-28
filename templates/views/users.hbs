@@ -88,7 +88,11 @@
             onSuccess: function (result) {
                 const accessToken = result.getAccessToken().getJwtToken()
                 console.log(accessToken)
-                window.location.href = 'profile'
+                fetch(`/api/users/${userData.Username}`).then((response) => {
+                    response.json().then((data) => {
+                        window.location.href = `/users/${data[0].employee_id}`
+                    })
+                })    
             },
             onFailure: function(err) {
                 alert(err.message || JSON.stringify(err))

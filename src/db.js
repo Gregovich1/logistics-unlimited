@@ -4,29 +4,16 @@ const config = {
     user: 'admin',
     password: 'capstone1',
     server: 'database-1.ctrqljmft4jn.us-east-1.rds.amazonaws.com',
-    database: 'Logistics_Unlimited',
+    database: 'Logistics_Unlimited'
 }
 
-sql.connect(config).then(() => {
-    return sql.query('select * from Trucks ')
-}).then(result => {
-    console.log('It did not fail')
-    console.log(result.recordsets)
-}).catch(err => {
-    console.log('got an error')
-    console.log(typeof(err))
-    console.log(err)
-})
- 
-sql.on('error', err => {
-    console.log(err)
-})
+const poolPromise = new sql.ConnectionPool(config)
+    .connect()
+    .then(pool => {
+    console.log('Connected to MSSQL')
+    return pool
+    }).catch(err => console.log('Database Connection Failed! Bad Config: ', err))
 
-const selectAll = (config, table) => {
-
+module.exports = {
+    sql, poolPromise
 }
-
-const getUserId = (config, table) => {
-
-}
-
