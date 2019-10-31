@@ -35,6 +35,14 @@ app.get('/trucks', (req, res) => {
     res.render('trucks')
 })
 
+app.get('/contact', (req, res) => {
+    res.render('contact')
+})
+
+app.get('/faq', (req, res) => {
+    res.render('faq')
+})
+
 app.get('/users/:user', async (req, res) => {
     try {
         const pool = await poolPromise
