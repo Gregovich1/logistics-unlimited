@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Logistics Unlimited</title>
+        {{!-- <link rel="icon" href=""> --}}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <script src="/src/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(document).ready(function(){
+            var api_url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="
+            var key = "AIzaSyDAVAPk7b7sZd9Pgm7lmY8PvXMTYAcCiaw"
+            var data
+            $("#submitButton").click(function(){
+                var origin = $("#startCity").val();
+                var destination = $("#endCity").val();
+                var url = api_url + origin + "&destinations=" + destination + "&key=" + key
+                var distance;
+
+                
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: JSON.parse(data),
+                    dataType: 'json',
+                    success: callback,
+                });
+            });
+        });
+        });
+    </script>
+    <body>
+            {{> header }}
+
+            <div class="jumbotron mx-auto" style="width: 768px; height: 480px;">
+                <div class="container">
+                    <form>
+                        <div class="form-group-row ml-5">
+                            <label>Starting City:</label>
+                            <input class="form-control" type="text" id="startCity" style="width: 360px;" placeholder="e.g. Phoenix, AZ">
+                        </div>
+                        <div class="form-group-row ml-5">
+                            <label class="mt-3">Destination City:</label>
+                            <input class="form-control" type="text" id="endCity" style="width: 360px;" placeholder="e.g. Fresno, CA">
+                        </div>
+                        <div class="form-group-row ml-5">
+                            <button class="btn btn-primary mt-3" type="submit" id="submitButton">Get Quote</button>
+                        </div>
+                        <div class="form-group-row ml-5">
+                            <label class="mt-5" id="quotePrice"></label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {{> footer }}
+    </body>
+</html>
