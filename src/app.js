@@ -43,6 +43,10 @@ app.get('/faq', (req, res) => {
     res.render('faq')
 })
 
+app.get('/signin', (req, res) => {
+    res.render('users')
+})
+
 app.get('/users/:user', async (req, res) => {
     try {
         const pool = await poolPromise
