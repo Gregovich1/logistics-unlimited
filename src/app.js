@@ -43,6 +43,14 @@ app.get('/faq', (req, res) => {
     res.render('faq')
 })
 
+app.get('/quote', (req, res) => {
+    res.render('quote')
+})
+
+app.get('/signin', (req, res) => {
+    res.render('users')
+})
+
 app.get('/users/:user', async (req, res) => {
     try {
         const pool = await poolPromise
@@ -86,6 +94,17 @@ app.get('/api/trucks', async (req, res) => {
       }
     })
 
+app.get('/api/trucks/:search', async (req, res) => {
+    try {
+        const pool = await poolPromise
+        const result = await pool.request()
+            .query('select * from Trucks')      
+        res.json(result.recordset)
+      } catch (err) {
+        res.status(500)
+        res.send(err.message)
+      }
+})
 app.get('/api/users', async (req, res) => {
     try {
         const pool = await poolPromise
