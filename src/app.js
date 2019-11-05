@@ -86,8 +86,12 @@ app.get('/api/trucks', async (req, res) => {
     try {
         const pool = await poolPromise
         const result = await pool.request()
-            .query('select * from Trucks')      
-        res.json(result.recordset)
+            .query('select * from Trucks')
+        if (req.query.search) {
+            
+        } else {
+            res.json(result.recordset)
+        }
       } catch (err) {
         res.status(500)
         res.send(err.message)
