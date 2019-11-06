@@ -5,58 +5,88 @@
         {{!-- <link rel="icon" href=""> --}}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
+    <script>
+        var startCityName = "Flagstaff, AZ"; 
+        var endCityName = "Flagstaff, AZ";
+        var distance = {20: 145, 30: 488, 40: 677, 50: 1109, 
+                        11: 145, 31: 355, 41: 821, 51: 1204, 
+                        12: 488, 22: 355, 42: 1078, 52: 1559, 
+                        13: 677, 23: 821, 33: 1078, 53: 600, 
+                        14: 1109, 24: 1204, 34: 1559, 44: 600};
+
+        function getStartCity(sel) {
+            startCityName = sel.options[sel.selectedIndex].text;
+        }
+
+        function getEndCity(sel) {
+            endCityName = sel.options[sel.selectedIndex].text;
+        }
+
+        function getDistance() {
+            var startID = document.getElementById("startCity").value;
+            var endID = document.getElementById("endCity").value;
+            var distanceID = parseInt(startID) + parseInt(endID);
+            var miles = distance[distanceID];
+
+            var rate = 6.21;
+            var quote = miles * rate;
+
+            if (quote) {
+                document.getElementById("quotePrice").innerHTML = "The cost is \$" + 
+                Intl.NumberFormat().format(quote) + " to travel " + 
+                Intl.NumberFormat().format(miles) + " miles from " +
+                startCityName + " to " + endCityName + ".";
+            } else {
+                document.getElementById("quotePrice").innerHTML = "Choose two different cities, please.";
+            }            
+        }
+    </script>
     <script src="/src/app.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script>
-        $(document).ready(function(){
-            $(document).ready(function(){
-            var api_url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="
-            var key = "AIzaSyDAVAPk7b7sZd9Pgm7lmY8PvXMTYAcCiaw"
-            var data
-            $("#submitButton").click(function(){
-                var origin = $("#startCity").val();
-                var destination = $("#endCity").val();
-                var url = api_url + origin + "&destinations=" + destination + "&key=" + key
-                var distance;
 
-                
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: JSON.parse(data),
-                    dataType: 'json',
-                    success: callback,
-                });
-            });
-        });
-        });
     </script>
     <body>
             {{> header }}
 
             <div class="jumbotron mx-auto" style="width: 768px; height: 480px;">
-                <div class="container">
-                    <form>
-                        <div class="form-group-row ml-5">
-                            <label>Starting City:</label>
-                            <input class="form-control" type="text" id="startCity" style="width: 360px;" placeholder="e.g. Phoenix, AZ">
+            <div class="container">
+                <form>
+                    <div class="form-group-row ml-5">
+                        <label>Starting City:</label>
+                        <div class="form-group">
+                            <select class="form-control" id="startCity" onchange="getStartCity(this)">
+                              <option value="0">Flagstaff, AZ</option>
+                              <option value="1">Phoenix, AZ</option>
+                              <option value="2">San Diego, CA</option>
+                              <option value="3">Denver, CO</option>
+                              <option value="4">Kansas City, KA</option>
+                            </select>
+                        </div> 
+                    </div>
+                    <div class="form-group-row ml-5">
+                        <label class="mt-3">Destination City:</label>
+                        <div class="form-group">
+                            <select class="form-control" id="endCity" onchange="getEndCity(this)">
+                              <option value="10">Flagstaff, AZ</option>
+                              <option value="20">Phoenix, AZ</option>
+                              <option value="30">San Diego, CA</option>
+                              <option value="40">Denver, CO</option>
+                              <option value="50">Kansas City, KA</option>
+                            </select>
                         </div>
-                        <div class="form-group-row ml-5">
-                            <label class="mt-3">Destination City:</label>
-                            <input class="form-control" type="text" id="endCity" style="width: 360px;" placeholder="e.g. Fresno, CA">
-                        </div>
-                        <div class="form-group-row ml-5">
-                            <button class="btn btn-primary mt-3" type="button" id="submitButton">Get Quote</button>
-                        </div>
-                        <div class="form-group-row ml-5">
-                            <label class="mt-5" id="quotePrice"></label>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group-row ml-5">
+                        <button class="btn btn-primary mt-3" type="button" id="submitButton" onclick="getDistance()">Get Quote</button>
+                    </div>
+                    <div class="form-group-row ml-5">
+                        <label class="mt-5" id="quotePrice"></label>
+                    </div>
+                </form>
             </div>
+        </div>
 
             {{> footer }}
     </body>
