@@ -3,6 +3,7 @@ const path = require('path')
 const hbs = require('hbs')
 const bodyparser = require('body-parser')
 const { poolPromise } = require('./db')
+const _ = require('lodash')
 
 const app = express()
 
@@ -88,7 +89,15 @@ app.get('/api/trucks', async (req, res) => {
         const result = await pool.request()
             .query('select * from Trucks')
         if (req.query.search) {
-            
+            let searched
+            let found
+            if (!_.parseInt(req.query.search)) {
+                searched = _.capitalize(req.query.search)
+                found = _.filter(result.recordset, { 'truck_make': searched })
+                res.json(found)
+            } else {
+                res.json(_.filter(result.recordset, { 'truck_year': _.parseInt(req.query.search) }))
+            }
         } else {
             res.json(result.recordset)
         }
