@@ -34,16 +34,13 @@
     </head>
     <body>
         {{> header }}
+        <form id="search">
+            <label>Search for a truck by make or year.</label>
+            <input id="searchInput" placeholder="e.g. Volvo">
+            <button>Search</button>
+        </form>
         <div id="trucks">
         </div>
-        <form id="search">
-        <label>Search for a truck by make or year.</label>
-        <input id="searchInput" placeholder="e.g. Volvo">
-        <button>Search</button>
-        </form>
-            
-
-
         <form id="add" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
             <h4>Add a truck to our inventory:</h4>
             <label for="truckYearInput">Truck Year</label>
@@ -123,29 +120,30 @@
                     }
                 })
             })
-        })
-        const createTable = (data) => {
-            let col = [];
-            for (let i = 0; i < data.length; i++) {
-                for (let key in data[i]) {
-                    if (col.indexOf(key) === -1) {
-                        col.push(key)
+            const createTable = (data) => {
+                let col = []
+                for (let i = 0; i < data.length; i++) {
+                    for (let key in data[i]) {
+                        if (col.indexOf(key) === -1) {
+                            col.push(key)
+                        }
                     }
                 }
-            }
-            const table = document.createElement('table')
-            let tr = table.insertRow(-1)                 // TABLE ROW.
-            for (let i = 0; i < col.length; i++) {
-                let th = document.createElement("th")     // TABLE HEADER.
-                th.innerHTML = col[i]
-                tr.appendChild(th)
-            }
-            for (let i = 0; i < data.length; i++) {
-                tr = table.insertRow(-1)
-                for (let j = 0; j < col.length; j++) {
-                    let tabCell = tr.insertCell(-1)
-                    tabCell.innerHTML = data[i][col[j]]
+                const table = document.createElement('table')
+                let tr = table.insertRow(-1)                 // TABLE ROW.
+                for (let i = 0; i < col.length; i++) {
+                    let th = document.createElement("th")     // TABLE HEADER.
+                    th.innerHTML = col[i]
+                    tr.appendChild(th)
                 }
+                for (let i = 0; i < data.length; i++) {
+                    tr = table.insertRow(-1)
+                    for (let j = 0; j < col.length; j++) {
+                        let tabCell = tr.insertCell(-1)
+                        tabCell.innerHTML = data[i][col[j]]
+                    }
+                }
+                return table
             }
             const createMessage = (message) => {
                 const el = document.createElement('p')
