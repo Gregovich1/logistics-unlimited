@@ -3,6 +3,7 @@ const path = require('path')
 const hbs = require('hbs')
 const bodyparser = require('body-parser')
 const { poolPromise } = require('./db')
+const _ = require('lodash')
 
 const app = express()
 
@@ -14,6 +15,7 @@ const partialsPath = path.join(__dirname, '../templates/partials')
 app.set('views', viewspath)
 app.set('view engine', 'hbs')
 app.use(bodyparser.urlencoded( {extended: true} ))
+app.use(require("body-parser").json())
 hbs.registerPartials(partialsPath)
 
 app.use(express.static(publicDirectoryPath))
