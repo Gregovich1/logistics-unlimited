@@ -3,8 +3,6 @@ const path = require('path')
 const hbs = require('hbs')
 const bodyparser = require('body-parser')
 const { poolPromise } = require('./db')
-const _ = require('lodash')
-const shortid = require('shortid')
 
 const app = express()
 
@@ -16,7 +14,6 @@ const partialsPath = path.join(__dirname, '../templates/partials')
 app.set('views', viewspath)
 app.set('view engine', 'hbs')
 app.use(bodyparser.urlencoded( {extended: true} ))
-app.use(require("body-parser").json())
 hbs.registerPartials(partialsPath)
 
 app.use(express.static(publicDirectoryPath))
@@ -51,7 +48,7 @@ app.get('/quote', (req, res) => {
 })
 
 app.get('/signin', (req, res) => {
-    res.render('users')
+    res.render('signin')
 })
 
 app.get('/users/:user', async (req, res) => {
@@ -89,51 +86,14 @@ app.get('/api/trucks', async (req, res) => {
     try {
         const pool = await poolPromise
         const result = await pool.request()
-            .query('select * from Trucks')
-        if (req.query.search) {
-            let searched
-            let found
-            if (!_.parseInt(req.query.search)) {
-                searched = _.capitalize(req.query.search)
-                found = _.filter(result.recordset, { 'truck_make': searched })
-                res.json(found)
-            } else {
-                res.json(_.filter(result.recordset, { 'truck_year': _.parseInt(req.query.search) }))
-            }
-        } else {
-            res.json(result.recordset)
-        }
-      } catch (err) {
-        res.status(500)
-        res.send(err.message)
-      }
-    })
-app.post('/api/trucks', async (req, res) => {
-    try {
-        console.log(req.body)
-        let id = shortid.generate()
-        const pool = await poolPromise
-        const result = await pool.request()
-            .query(`insert into Trucks values (${req.body.truck_year},'${req.body.truck_make}','${req.body.truck_model}','${req.body.license_plate}',null)`)
-            console.log(result)
-            res.json(result.rowsaffected)
-      } catch (err) {
-        res.status(500)
-        console.log(err.message)
-        res.send(err.message)
-      }
-})
-app.get('/api/trucks/:search', async (req, res) => {
-    try {
-        const pool = await poolPromise
-        const result = await pool.request()
             .query('select * from Trucks')      
         res.json(result.recordset)
       } catch (err) {
         res.status(500)
         res.send(err.message)
       }
-})
+    })
+
 app.get('/api/users', async (req, res) => {
     try {
         const pool = await poolPromise

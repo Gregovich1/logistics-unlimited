@@ -24,6 +24,9 @@
         <link rel="stylesheet" href="css/message.css"> -->
     </head>
     <body>
+
+        {{> header }}
+
         <form>
           <h1>Please sign in</h1>
     
@@ -32,6 +35,8 @@
           <button type="button" onclick="signIn()">Sign in</button>
     
         </form>
+
+        {{> footer }}
         <script src="/src/app.js"></script>
         <script src="/public/js/vendor/bootstrap.min.js"></script>
     </body>
