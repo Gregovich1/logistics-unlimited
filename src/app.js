@@ -54,7 +54,7 @@ app.get('/quote', (req, res) => {
 })
 
 app.get('/signin', (req, res) => {
-    res.render('signin')
+    res.render('users')
 })
 
 app.get('/users/:user', async (req, res) => {
