@@ -4,6 +4,7 @@ const hbs = require('hbs')
 const bodyparser = require('body-parser')
 const { poolPromise } = require('./db')
 const _ = require('lodash')
+const shortid = require('shortid')
 
 const app = express()
 
@@ -15,6 +16,7 @@ const partialsPath = path.join(__dirname, '../templates/partials')
 app.set('views', viewspath)
 app.set('view engine', 'hbs')
 app.use(bodyparser.urlencoded( {extended: true} ))
+app.use(require("body-parser").json())
 hbs.registerPartials(partialsPath)
 
 app.use(express.static(publicDirectoryPath))
@@ -106,7 +108,21 @@ app.get('/api/trucks', async (req, res) => {
         res.send(err.message)
       }
     })
-
+app.post('/api/trucks', async (req, res) => {
+    try {
+        console.log(req.body)
+        let id = shortid.generate()
+        const pool = await poolPromise
+        const result = await pool.request()
+            .query(`insert into Trucks values (${req.body.truck_year},'${req.body.truck_make}','${req.body.truck_model}','${req.body.license_plate}',null)`)
+            console.log(result)
+            res.json(result.rowsaffected)
+      } catch (err) {
+        res.status(500)
+        console.log(err.message)
+        res.send(err.message)
+      }
+})
 app.get('/api/trucks/:search', async (req, res) => {
     try {
         const pool = await poolPromise

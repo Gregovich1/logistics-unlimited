@@ -41,6 +41,18 @@
         </form>
         <div id="trucks">
         </div>
+        <form id="add">
+            <h4>Add a truck to our inventory here.</h4>
+            <label for="truckYearInput">Truck Year</label>
+            <input id="truckYearInput" required name="truckYearInput">
+            <label for="truckMakeInput">Truck Make</label>
+            <input id="truckMakeInput" required name="truckMakeInput">
+            <label for="truckModelInput">Truck Model</label>
+            <input id="truckModelInput" required name="truckModelInput">
+            <label for="truckPlateInput">Truck License Plate</label>
+            <input id="truckPlateInput" required name="truckPlateInput">
+            <button>Add a Truck</button>
+        </form>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -48,6 +60,7 @@
             const $search = document.getElementById('search')
             const $searchInput = document.getElementById('searchInput')
             const $trucks = document.getElementById('trucks')
+            const $add = document.getElementById('add')
             $search.addEventListener('submit', (e) => {
                 e.preventDefault()
                 $trucks.removeChild($trucks.firstChild)
@@ -60,6 +73,29 @@
                             $trucks.appendChild(createTable(data))
                         }
                     })
+                })
+            })
+            $add.addEventListener('submit', (e) => {
+                e.preventDefault()
+                $trucks.removeChild($trucks.firstChild)
+                const truckData = {
+                    truck_year: document.getElementById('truckYearInput').value,
+                    truck_make: document.getElementById('truckMakeInput').value,
+                    truck_model: document.getElementById('truckModelInput').value,
+                    license_plate: document.getElementById('truckPlateInput').value
+                }
+                fetch('/api/trucks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(truckData)
+                }).then((response) => {
+                    if (response[0] > 0){
+                        $trucks.appendChild('<p>Success! Use a search to confirm.</p>')
+                    } else {
+                        $trucks.appendChild('<p>Failed to add a truck. Try again.</p>')
+                    }
                 })
             })
             const createTable = (data) => {
