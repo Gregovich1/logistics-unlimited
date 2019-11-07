@@ -3,8 +3,6 @@ const path = require('path')
 const hbs = require('hbs')
 const bodyparser = require('body-parser')
 const { poolPromise } = require('./db')
-const _ = require('lodash')
-const shortid = require('shortid')
 
 const app = express()
 
@@ -16,7 +14,6 @@ const partialsPath = path.join(__dirname, '../templates/partials')
 app.set('views', viewspath)
 app.set('view engine', 'hbs')
 app.use(bodyparser.urlencoded( {extended: true} ))
-app.use(require("body-parser").json())
 hbs.registerPartials(partialsPath)
 
 app.use(express.static(publicDirectoryPath))
@@ -51,7 +48,7 @@ app.get('/quote', (req, res) => {
 })
 
 app.get('/signin', (req, res) => {
-    res.render('users')
+    res.render('signin')
 })
 
 app.get('/users/:user', async (req, res) => {
@@ -146,7 +143,8 @@ app.get('/api/trucks/:search', async (req, res) => {
         res.status(500)
         res.send(err.message)
       }
-})
+    })
+
 app.get('/api/users', async (req, res) => {
     try {
         const pool = await poolPromise
