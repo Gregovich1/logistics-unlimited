@@ -41,8 +41,8 @@
         </form>
         <div id="trucks">
         </div>
-        <form id="add">
-            <h4>Add a truck to our inventory here.</h4>
+        <form id="add" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
+            <h4>Add a truck to our inventory:</h4>
             <label for="truckYearInput">Truck Year</label>
             <input id="truckYearInput" required name="truckYearInput">
             <label for="truckMakeInput">Truck Make</label>
@@ -53,6 +53,12 @@
             <input id="truckPlateInput" required name="truckPlateInput">
             <button>Add a Truck</button>
         </form>
+        <form id="delete" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
+            <h4>Delete a truck from our inventory:</h4>
+            <label for="truckIDInput">Truck ID</label>
+            <input id="truckIDInput" required name="truckIDInput">
+            <button>Delete Truck</button>
+        </form>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -61,6 +67,7 @@
             const $searchInput = document.getElementById('searchInput')
             const $trucks = document.getElementById('trucks')
             const $add = document.getElementById('add')
+            const $delete = document.getElementById('delete')
             $search.addEventListener('submit', (e) => {
                 e.preventDefault()
                 $trucks.removeChild($trucks.firstChild)
@@ -68,7 +75,7 @@
                 fetch('/api/trucks?search=' + requested).then((response) => {
                     response.json().then((data) => {
                         if (data.error) {
-                            $trucks.appendChild('<p>No results, please try a different search term.</p>')
+                            $trucks.appendChild(createMessage('No results, please try a different search term.'))
                         } else {
                             $trucks.appendChild(createTable(data))
                         }
@@ -91,10 +98,24 @@
                     },
                     body: JSON.stringify(truckData)
                 }).then((response) => {
-                    if (response[0] > 0){
-                        $trucks.appendChild('<p>Success! Use a search to confirm.</p>')
+                    if (response.error){
+                        $trucks.appendChild(createMessage('Failed to add a truck. Try again.'))
                     } else {
-                        $trucks.appendChild('<p>Failed to add a truck. Try again.</p>')
+                        $trucks.appendChild(createMessage('Success! Use a search to confirm.'))
+                    }
+                })
+            })
+            $delete.addEventListener('submit', (e) => {
+                e.preventDefault()
+                $trucks.removeChild($trucks.firstChild)
+                const id = document.getElementById('truckIDInput').value
+                fetch(`/api/trucks/${id}`, {
+                    method: 'DELETE'
+                }).then((response) => {
+                    if (response.error){
+                        $trucks.appendChild(createMessage('Failed to delete a truck. Try again.'))
+                    } else {
+                        $trucks.appendChild(createMessage('Success! Use a search to confirm.'))
                     }
                 })
             })
@@ -123,6 +144,11 @@
                 }
                 return table
             }
+            const createMessage = (message) => {
+                const el = document.createElement('p')
+                el.innerHTML = message
+                return el
+            } 
         </script>
     </body>
 </html>

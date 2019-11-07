@@ -111,12 +111,25 @@ app.get('/api/trucks', async (req, res) => {
 app.post('/api/trucks', async (req, res) => {
     try {
         console.log(req.body)
-        let id = shortid.generate()
         const pool = await poolPromise
         const result = await pool.request()
             .query(`insert into Trucks values (${req.body.truck_year},'${req.body.truck_make}','${req.body.truck_model}','${req.body.license_plate}',null)`)
-            console.log(result)
-            res.json(result.rowsaffected)
+            console.log(result.rowsAffected)
+            res.json(result.rowsAffected)
+      } catch (err) {
+        res.status(500)
+        console.log(err.message)
+        res.send(err.message)
+      }
+})
+app.delete('/api/trucks/:id', async (req, res) => {
+    try {
+        console.log(req.params.id)
+        const pool = await poolPromise
+        const result = await pool.request()
+            .query(`delete from Trucks where truck_id = ${req.params.id}`)
+            console.log(result.rowsAffected)
+            res.json(result.rowsAffected)
       } catch (err) {
         res.status(500)
         console.log(err.message)
