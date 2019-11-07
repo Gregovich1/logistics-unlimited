@@ -25,6 +25,12 @@ app.get('', (req, res) => {
     })
 })
 
+app.get('/index', (req, res) => {
+    res.render('index', {
+        title: 'Logistics Unlimited'
+    })
+})
+
 app.get('/users', (req, res) => {
     res.render('users', {
         title: 'Logistics Unlimited'
