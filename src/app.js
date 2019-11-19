@@ -4,7 +4,6 @@ const hbs = require('hbs')
 const bodyparser = require('body-parser')
 const { poolPromise } = require('./db')
 const _ = require('lodash')
-const Pusher = require('pusher')
 
 const app = express()
 
