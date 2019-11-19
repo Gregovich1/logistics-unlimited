@@ -8,7 +8,7 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-generator": "^4.16.1",
-    "handlebars": "^4.4.3",
+    "handlebars": "^4.5.3",
     "hbs": "^4.0.6",
     "lodash": "^4.17.15",
     "mssql": "^5.1.0",
