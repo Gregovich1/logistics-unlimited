@@ -2,18 +2,48 @@
 <html>
     <head>
         <title>Logistics Unlimited</title>
-        {{!-- <link rel="icon" href=""> --}}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            body {
+                background-color: rgb(207, 172, 178);
+            }
+            .brochure:hover {
+                -ms-transform: scale(1.5); /* IE 9 */
+                -ms-transition: transform 1s ease-in-out;
+                -webkit-transform: scale(1.5); /* Safari 3-8 */
+                -webkit-transition: transform 1s ease-in-out;
+                transform: scale(1.5);
+                transition: transform 1s ease-in-out;
+            }
+        </style>
     </head>
     <body>
         {{> header }}
-            <div class="jumbotron">
-                Logistics Unlimited Intranet
+            <div class="jumbotron text-center">
+                <h1>Logistics Unlimited Intranet</h1>
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        
+                        <h3>Promotional Materials</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="brochure">
+                            <img src="/img/brochureFront.png" class="img-fluid" alt="Brochure Front">
+                        </div>
+                        <br><br>
+                        <a href="/img/brochureFront.png" download>download(407kb)</a>
+                        <br><br>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="brochure">
+                            <img src="/img/brochureInside.png" class="img-fluid" alt="Brochure Inside">
+                        </div>
+                        <br><br>
+                        <a href="/img/brochureInside.png" download>download(342kb)</a>
+                        <br><br>
                     </div>
                 </div>
             </div>
