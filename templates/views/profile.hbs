@@ -4,8 +4,6 @@
         <title>Logistics Unlimited</title>
         {{!-- <link rel="icon" href=""> --}}
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="container main-secction">
@@ -20,8 +18,8 @@
                             <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle">
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
-                            <button id="btn-contact" (click)="clearModal()" data-toggle="modal" data-target="#contact" class="btn btn-success btn-block follow">Intranet</button> 
-                            <button class="btn btn-warning btn-block">Accounting</button>                               
+                            <a id="btn-intranet" href="/intranet" class="btn btn-primary btn-lg">Intranet</a> 
+                            <a id="btn-trucks" href="/trucks" class="btn btn-primary btn-lg">Trucks</a>                              
                         </div>
                         <div class="row user-detail-row">
                             <div class="col-md-12 col-sm-12 user-detail-section2 pull-left">
@@ -215,7 +213,8 @@
             </div>
         </div>
     </div>
-        <script>
-        </script>
+    {{>footer }}
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </body>
 </html>

@@ -34,13 +34,20 @@
     </head>
     <body>
         {{> header }}
+        <div class="jumbotron text-center">
+            <img src="/img/Logo-beta.png" style="width: 20%; height: auto;">
+            <h2>Fleet Management</h2>
+        </div>
+        <div class="row">
+            <div id="trucks" class="text-center">
+            </div>
+        </div>
         <form id="search">
             <label>Search for a truck by make or year.</label>
             <input id="searchInput" placeholder="e.g. Volvo">
             <button>Search</button>
         </form>
-        <div id="trucks">
-        </div>
+        
         <form id="add" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
             <h4>Add a truck to our inventory:</h4>
             <label for="truckYearInput">Truck Year</label>
@@ -131,14 +138,14 @@
                 }
                 const table = document.createElement('table')
                 let tr = table.insertRow(-1)                 // TABLE ROW.
-                for (let i = 0; i < col.length; i++) {
+                for (let i = 0; i < col.length - 1; i++) {
                     let th = document.createElement("th")     // TABLE HEADER.
                     th.innerHTML = col[i]
                     tr.appendChild(th)
                 }
                 for (let i = 0; i < data.length; i++) {
                     tr = table.insertRow(-1)
-                    for (let j = 0; j < col.length; j++) {
+                    for (let j = 0; j < col.length - 1; j++) {
                         let tabCell = tr.insertCell(-1)
                         tabCell.innerHTML = data[i][col[j]]
                     }
