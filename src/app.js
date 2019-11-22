@@ -59,10 +59,6 @@ app.get('/signin', (req, res) => {
     res.render('users')
 })
 
-app.get('/intranet', (req, res) => {
-    res.render('intranet')
-})
-
 app.get('/users/:user', async (req, res) => {
     try {
         const pool = await poolPromise
