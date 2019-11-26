@@ -60,11 +60,11 @@
                 hazard = "N";
             }
 
-            if (weight < 10000) {
+            if (weight > 10000) {
                 rate += .15;
             }
 
-            if (weight < 40000) {
+            if (weight > 40000) {
                 rate += .1;
             }
 
@@ -77,7 +77,12 @@
 
             var orderCode = startID + endID + "D" + miles + "-" + weight + "W" + volume + "V-" + hazard + "$" + quote;
             
-            if (quote) {
+            if (isNaN(quote)) {
+                document.getElementById("contact").style.display = "none";
+                document.getElementById("quote").style.display = "inline";
+
+                alert("Choose two different cities, please.");
+            } else {
                 document.getElementById("quote").style.display = "none";
                 document.getElementById("contact").style.display = "block";
 
@@ -86,12 +91,8 @@
                 Intl.NumberFormat().format(miles) + " miles from " +
                 startCityName + " to " + endCityName + ".");
                 
-                document.getElementById("orderCode").value = orderCode;
-            } else {
-                document.getElementById("contact").style.display = "none";
-                document.getElementById("quote").style.display = "inline";
-
-                alert("Choose two different cities, please.");
+                document.getElementById("orderCode").value = parseStringorderCode;
+                
             }              
         }
     </script>
