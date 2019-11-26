@@ -91,18 +91,13 @@
                 Intl.NumberFormat().format(miles) + " miles from " +
                 startCityName + " to " + endCityName + ".");
                 
-                document.getElementById("orderCode").value = parseStringorderCode;
-                
+                document.getElementById("orderCode").value = orderCode;                
             }              
         }
     </script>
-    <script src="/src/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script>
-
-    </script>
+    
     <body>
         {{> header }}
         <br>
@@ -117,7 +112,7 @@
                               <option value="1">Phoenix, AZ</option>
                               <option value="2">San Diego, CA</option>
                               <option value="3">Denver, CO</option>
-                              <option value="4">Kansas City, KA</option>
+                              <option value="4">Kansas City, KS</option>
                             </select>
                         </div> 
                     </div>
@@ -130,7 +125,7 @@
                               <option value="20">Phoenix, AZ</option>
                               <option value="30">San Diego, CA</option>
                               <option value="40">Denver, CO</option>
-                              <option value="50">Kansas City, KA</option>
+                              <option value="50">Kansas City, KS</option>
                             </select>
                         </div>
                     </div>
