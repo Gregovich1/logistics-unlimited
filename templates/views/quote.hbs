@@ -8,11 +8,16 @@
     <script>
         var startCityName = "Flagstaff, AZ"; 
         var endCityName = "Flagstaff, AZ";
+        var weight = 100;
+        var volume = 10;
+        var hazard = false;
         var distance = {20: 145, 30: 488, 40: 677, 50: 1109, 
                         11: 145, 31: 355, 41: 821, 51: 1204, 
                         12: 488, 22: 355, 42: 1078, 52: 1559, 
                         13: 677, 23: 821, 33: 1078, 53: 600, 
                         14: 1109, 24: 1204, 34: 1559, 44: 600};
+        var rate = 1;
+        
 
         function getStartCity(sel) {
             startCityName = sel.options[sel.selectedIndex].text;
@@ -22,29 +27,72 @@
             endCityName = sel.options[sel.selectedIndex].text;
         }
 
+        function getWeight(sel) {
+            weight = document.getElementById("weight").value;
+        }
+
+        function getVolume(sel) {
+            volume = document.getElementById("volume").value;
+        }
+
+        function getHazard(sel) {
+            hazard = document.getElementById("hazard").checked;
+        }
+   
+        function resetQuote() {
+            document.getElementById("quote").reset(); 
+        }
+
+        function resetContact() {
+            document.getElementById("contact").reset(); 
+        }
+
         function getDistance() {
             var startID = document.getElementById("startCity").value;
             var endID = document.getElementById("endCity").value;
             var distanceID = parseInt(startID) + parseInt(endID);
             var miles = distance[distanceID];
 
-            var rate = 6.21;
+            if (hazard == true) {
+                rate += 0.25;
+                hazard = "Y";
+            } else {
+                hazard = "N";
+            }
+
+            if (weight < 10000) {
+                rate += .15;
+            }
+
+            if (weight < 40000) {
+                rate += .1;
+            }
+
+            if (volume < 1000) {
+                rate += .1;
+            }
+
             var quote = miles * rate;
+            quote = quote.toFixed(2);
 
+            var orderCode = startID + endID + "D" + miles + "-" + weight + "W" + volume + "V-" + hazard + "$" + quote;
+            
             if (quote) {
-                document.getElementById("contact").style.visibility = "visible";
-                document.getElementById("content").style.height = "880px";
+                document.getElementById("quote").style.display = "none";
+                document.getElementById("contact").style.display = "block";
 
-                document.getElementById("quotePrice").innerHTML = "The cost is \$" + 
+                alert("The cost is \$" + 
                 Intl.NumberFormat().format(quote) + " to travel " + 
                 Intl.NumberFormat().format(miles) + " miles from " +
-                startCityName + " to " + endCityName + ".";
-            } else {
-               document.getElementById("contact").style.visibility = "hidden";
-                document.getElementById("content").style.height = "480px";
+                startCityName + " to " + endCityName + ".");
                 
-                document.getElementById("quotePrice").innerHTML = "Choose two different cities, please.";
-            }           
+                document.getElementById("orderCode").value = orderCode;
+            } else {
+                document.getElementById("contact").style.display = "none";
+                document.getElementById("quote").style.display = "inline";
+
+                alert("Choose two different cities, please.");
+            }              
         }
     </script>
     <script src="/src/app.js"></script>
@@ -55,11 +103,11 @@
 
     </script>
     <body>
-            {{> header }}
-            <br>
-            <div class="jumbotron mx-auto" style="width: 768px; height: 480px;">
+        {{> header }}
+        <br>
+        <div class="jumbotron mx-auto" style="width: 768px; height: 480px;">
             <div class="container">
-                <form>
+                <form id="quote">
                     <div class="form-group-row ml-5">
                         <label>Starting City:</label>
                         <div class="form-group">
@@ -72,6 +120,7 @@
                             </select>
                         </div> 
                     </div>
+
                     <div class="form-group-row ml-5">
                         <label class="mt-3">Destination City:</label>
                         <div class="form-group">
@@ -84,35 +133,53 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="form-group-row ml-5">
+                        <label class="col-5 text-left" for="weight" >Weight of cargo (in lbs.):</label>
+                        <label class="col-5 text-left" for="volume" >Volume of cargo (in cu. ft.): <label></label>
+                    </div>
+
+                    <div class="form-group-row ml-5 mt-0">
+                        <input class="col-5" type="number" id="weight" min="100" max="80000" value="100">
+                        <input class="col-5" type="number" id="volume" min="10" max="4050" value="10">
+                    </div>
+
+                    <div class="form-group-row ml-5 mt-3">
+                        <input class="mr-1" type="checkbox" aria-label="Checkbox for following text input">
+                        <label for="hazard">Are you shipping hazardous materials?</label>
+                    </div>
+
                     <div class="form-group-row ml-5">
                         <button class="btn btn-primary mt-3" type="button" id="submitButton" onclick="getDistance()">Get Quote</button>
+                        <button class="btn btn-secondary ml-5 mt-3" type="button" id="resetQuoteButton" onclick="resetQuote()">Reset Form</button>
                     </div>
-                    <div class="form-group-row ml-5">
-                        <label class="mt-5" id="quotePrice"></label>
-                    </div>
+
                 </form>
-                <form id="contact" style="visibility: hidden">
+
+                <form id="contact" style="display: none">
                     <div class="form-group-row ml-5">
                         <label>First Name:</label>
                         <input type="firstname" class="form-control col-sm-12" id="firstName" placeholder="First name">
                     </div>
                     <div class="form-group-row ml-5">
                         <label class="mt-1">Last Name:</label>
-                        <input type="firstname" class="form-control col-sm-12" id="lastName" placeholder="Last name">
+                        <input type="lastname" class="form-control col-sm-12" id="lastName" placeholder="Last name">
                     </div>
                     <div class="form-group-row ml-5">
                         <label class="mt-1">E-Mail:</label>
-                        <input type="firstname" class="form-control col-sm-12" id="email" placeholder="you@example.com">
+                        <input type="email" class="form-control col-sm-12" id="email" placeholder="you@example.com">
                     </div>
                     <div class="form-group-row ml-5">
                         <label class="mt-1">Comment</label>
-                        <textarea type="firstname" class="form-control col-sm-12" id="comment" placeholder="Write comments here..."></textarea>
+                        <textarea type="comment" class="form-control col-sm-12" id="comment" placeholder="Write comments here..."></textarea>
+                        <input type="hidden" name="orderCode" value="">
                     </div>
                     <button class="btn btn-primary ml-5 mt-3" href="#" onclick="">Submit</button>
+                    <button class="btn btn-secondary ml-5 mt-3" type="button" id="resetFormButton" onclick="resetForm()">Reset</button>
                 </form>
             </div>
         </div>
 
-            {{> footer }}
+        {{> footer }}
     </body>
 </html>
