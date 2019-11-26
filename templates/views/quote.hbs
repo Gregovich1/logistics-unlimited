@@ -77,7 +77,7 @@
 
             var orderCode = startID + endID + "D" + miles + "-" + weight + "W" + volume + "V-" + hazard + "$" + quote;
             
-            if (quote) {
+            if (isNaN(quote) {
                 document.getElementById("quote").style.display = "none";
                 document.getElementById("contact").style.display = "block";
 
