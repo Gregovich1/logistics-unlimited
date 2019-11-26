@@ -5,7 +5,86 @@
         {{!-- <link rel="icon" href=""> --}}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
-    <script>
+    <body>
+        {{> header }}
+        <br>
+        <div class="jumbotron mx-auto" style="width: 768px; height: 480px;">
+            <div class="container">
+                <form id="quote">
+                    <div class="form-group-row ml-5">
+                        <label>Starting City:</label>
+                        <div class="form-group">
+                            <select class="form-control" id="startCity" onchange="getStartCity(this)">
+                              <option value="0">Flagstaff, AZ</option>
+                              <option value="1">Phoenix, AZ</option>
+                              <option value="2">San Diego, CA</option>
+                              <option value="3">Denver, CO</option>
+                              <option value="4">Kansas City, KS</option>
+                            </select>
+                        </div> 
+                    </div>
+
+                    <div class="form-group-row ml-5">
+                        <label class="mt-3">Destination City:</label>
+                        <div class="form-group">
+                            <select class="form-control" id="endCity" onchange="getEndCity(this)">
+                              <option value="10">Flagstaff, AZ</option>
+                              <option value="20">Phoenix, AZ</option>
+                              <option value="30">San Diego, CA</option>
+                              <option value="40">Denver, CO</option>
+                              <option value="50">Kansas City, KS</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group-row ml-5">
+                        <label class="col-5 text-left" for="weight" >Weight of cargo (in lbs.):</label>
+                        <label class="col-5 text-left" for="volume" >Volume of cargo (in cu. ft.): <label></label>
+                    </div>
+
+                    <div class="form-group-row ml-5 mt-0">
+                        <input class="col-5" type="number" id="weight" min="100" max="80000" value="100">
+                        <input class="col-5" type="number" id="volume" min="10" max="4050" value="10">
+                    </div>
+
+                    <div class="form-group-row ml-5 mt-3">
+                        <input class="mr-1" type="checkbox" aria-label="Checkbox for following text input">
+                        <label for="hazard">Are you shipping hazardous materials?</label>
+                    </div>
+
+                    <div class="form-group-row ml-5">
+                        <button class="btn btn-primary mt-3" type="button" id="submitButton" onclick="getQuote()">Get Quote</button>
+                        <button class="btn btn-secondary ml-5 mt-3" type="button" id="resetQuoteButton" onclick="resetQuote()">Reset Form</button>
+                    </div>
+
+                </form>
+
+                <form id="contact" style="display: none">
+                    <div class="form-group-row ml-5">
+                        <label>First Name:</label>
+                        <input type="firstname" class="form-control col-sm-12" id="firstName" placeholder="First name">
+                    </div>
+                    <div class="form-group-row ml-5">
+                        <label class="mt-1">Last Name:</label>
+                        <input type="lastname" class="form-control col-sm-12" id="lastName" placeholder="Last name">
+                    </div>
+                    <div class="form-group-row ml-5">
+                        <label class="mt-1">E-Mail:</label>
+                        <input type="email" class="form-control col-sm-12" id="email" placeholder="you@example.com">
+                    </div>
+                    <div class="form-group-row ml-5">
+                        <label class="mt-1">Comment</label>
+                        <textarea type="comment" class="form-control col-sm-12" id="comment" placeholder="Write comments here..."></textarea>
+                        <input type="hidden" name="orderCode" value="">
+                    </div>
+                    <button class="btn btn-primary ml-5 mt-3" href="#" onclick="">Submit</button>
+                    <button class="btn btn-secondary ml-5 mt-3" type="button" id="resetFormButton" onclick="resetContact()">Reset</button>
+                </form>
+            </div>
+        </div>
+
+        {{> footer }}
+            <script>
         var startCityName = "Flagstaff, AZ"; 
         var endCityName = "Flagstaff, AZ";
         var weight = 100;
@@ -47,7 +126,7 @@
             document.getElementById("contact").reset(); 
         }
 
-        function getDistance() {
+        function getQuote() {
             var startID = document.getElementById("startCity").value;
             var endID = document.getElementById("endCity").value;
             var distanceID = parseInt(startID) + parseInt(endID);
@@ -91,96 +170,11 @@
                 Intl.NumberFormat().format(miles) + " miles from " +
                 startCityName + " to " + endCityName + ".");
                 
-                document.getElementById("orderCode").value = parseStringorderCode;
-                
+                document.getElementById("orderCode").value = orderCode;                
             }              
         }
     </script>
-    <script src="/src/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script>
-
-    </script>
-    <body>
-        {{> header }}
-        <br>
-        <div class="jumbotron mx-auto" style="width: 768px; height: 480px;">
-            <div class="container">
-                <form id="quote">
-                    <div class="form-group-row ml-5">
-                        <label>Starting City:</label>
-                        <div class="form-group">
-                            <select class="form-control" id="startCity" onchange="getStartCity(this)">
-                              <option value="0">Flagstaff, AZ</option>
-                              <option value="1">Phoenix, AZ</option>
-                              <option value="2">San Diego, CA</option>
-                              <option value="3">Denver, CO</option>
-                              <option value="4">Kansas City, KA</option>
-                            </select>
-                        </div> 
-                    </div>
-
-                    <div class="form-group-row ml-5">
-                        <label class="mt-3">Destination City:</label>
-                        <div class="form-group">
-                            <select class="form-control" id="endCity" onchange="getEndCity(this)">
-                              <option value="10">Flagstaff, AZ</option>
-                              <option value="20">Phoenix, AZ</option>
-                              <option value="30">San Diego, CA</option>
-                              <option value="40">Denver, CO</option>
-                              <option value="50">Kansas City, KA</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group-row ml-5">
-                        <label class="col-5 text-left" for="weight" >Weight of cargo (in lbs.):</label>
-                        <label class="col-5 text-left" for="volume" >Volume of cargo (in cu. ft.): <label></label>
-                    </div>
-
-                    <div class="form-group-row ml-5 mt-0">
-                        <input class="col-5" type="number" id="weight" min="100" max="80000" value="100">
-                        <input class="col-5" type="number" id="volume" min="10" max="4050" value="10">
-                    </div>
-
-                    <div class="form-group-row ml-5 mt-3">
-                        <input class="mr-1" type="checkbox" aria-label="Checkbox for following text input">
-                        <label for="hazard">Are you shipping hazardous materials?</label>
-                    </div>
-
-                    <div class="form-group-row ml-5">
-                        <button class="btn btn-primary mt-3" type="button" id="submitButton" onclick="getDistance()">Get Quote</button>
-                        <button class="btn btn-secondary ml-5 mt-3" type="button" id="resetQuoteButton" onclick="resetQuote()">Reset Form</button>
-                    </div>
-
-                </form>
-
-                <form id="contact" style="display: none">
-                    <div class="form-group-row ml-5">
-                        <label>First Name:</label>
-                        <input type="firstname" class="form-control col-sm-12" id="firstName" placeholder="First name">
-                    </div>
-                    <div class="form-group-row ml-5">
-                        <label class="mt-1">Last Name:</label>
-                        <input type="lastname" class="form-control col-sm-12" id="lastName" placeholder="Last name">
-                    </div>
-                    <div class="form-group-row ml-5">
-                        <label class="mt-1">E-Mail:</label>
-                        <input type="email" class="form-control col-sm-12" id="email" placeholder="you@example.com">
-                    </div>
-                    <div class="form-group-row ml-5">
-                        <label class="mt-1">Comment</label>
-                        <textarea type="comment" class="form-control col-sm-12" id="comment" placeholder="Write comments here..."></textarea>
-                        <input type="hidden" name="orderCode" value="">
-                    </div>
-                    <button class="btn btn-primary ml-5 mt-3" href="#" onclick="">Submit</button>
-                    <button class="btn btn-secondary ml-5 mt-3" type="button" id="resetFormButton" onclick="resetForm()">Reset</button>
-                </form>
-            </div>
-        </div>
-
-        {{> footer }}
     </body>
 </html>
