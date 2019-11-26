@@ -35,10 +35,10 @@
     <body>
         {{> header }}
         <div class="jumbotron text-center">
-            <img src="img/Logo-beta.png" style="width: 20%; height: auto;">
+            <img src="img/Logo-beta.PNG" style="width: 20%; height: auto;">
             <h2>Fleet Management</h2>
         </div>
-         <form id="search">
+         <form id="search" style="text-align: center;">
             <label>Search for a truck by make or year.</label>
             <input id="searchInput" placeholder="e.g. Volvo">
             <button>Search</button>
@@ -47,25 +47,32 @@
             <div id="trucks">
             </div>
         </div>
-        
-        <form id="add" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
-            <h4>Add a truck to our inventory:</h4>
-            <label for="truckYearInput">Truck Year</label>
-            <input id="truckYearInput" required name="truckYearInput">
-            <label for="truckMakeInput">Truck Make</label>
-            <input id="truckMakeInput" required name="truckMakeInput">
-            <label for="truckModelInput">Truck Model</label>
-            <input id="truckModelInput" required name="truckModelInput">
-            <label for="truckPlateInput">Truck License Plate</label>
-            <input id="truckPlateInput" required name="truckPlateInput">
-            <button>Add a Truck</button>
-        </form>
-        <form id="delete" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
-            <h4>Delete a truck from our inventory:</h4>
-            <label for="truckIDInput">Truck ID</label>
-            <input id="truckIDInput" required name="truckIDInput">
-            <button>Delete Truck</button>
-        </form>
+        <div class="container">
+            <div class="row">
+                <div class "col-lg-4">
+                    <form id="add" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
+                        <h4>Add a truck to our inventory:</h4>
+                        <label for="truckYearInput">Truck Year</label>
+                        <input id="truckYearInput" required name="truckYearInput">
+                        <label for="truckMakeInput">Truck Make</label>
+                        <input id="truckMakeInput" required name="truckMakeInput">
+                        <label for="truckModelInput">Truck Model</label>
+                        <input id="truckModelInput" required name="truckModelInput">
+                        <label for="truckPlateInput">Truck License Plate</label>
+                        <input id="truckPlateInput" required name="truckPlateInput">
+                        <button>Add a Truck</button>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <form id="delete" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
+                        <h4>Delete a truck from our inventory:</h4>
+                        <label for="truckIDInput">Truck ID</label>
+                        <input id="truckIDInput" required name="truckIDInput">
+                        <button>Delete Truck</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         {{> footer }}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
