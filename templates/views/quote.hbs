@@ -6,7 +6,97 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        {{> header }}
+            <script>
+        var startCityName = "Flagstaff, AZ"; 
+        var endCityName = "Flagstaff, AZ";
+        var weight = 100;
+        var volume = 10;
+        var hazard = false;
+        var distance = {20: 145, 30: 488, 40: 677, 50: 1109, 
+                        11: 145, 31: 355, 41: 821, 51: 1204, 
+                        12: 488, 22: 355, 42: 1078, 52: 1559, 
+                        13: 677, 23: 821, 33: 1078, 53: 600, 
+                        14: 1109, 24: 1204, 34: 1559, 44: 600};
+        var rate = 1;
+        
+
+        function getStartCity(sel) {
+            startCityName = sel.options[sel.selectedIndex].text;
+        }
+
+        function getEndCity(sel) {
+            endCityName = sel.options[sel.selectedIndex].text;
+        }
+
+        function getWeight(sel) {
+            weight = document.getElementById("weight").value;
+        }
+
+        function getVolume(sel) {
+            volume = document.getElementById("volume").value;
+        }
+
+        function getHazard(sel) {
+            hazard = document.getElementById("hazard").checked;
+        }
+   
+        function resetQuote() {
+            document.getElementById("quote").reset(); 
+        }
+
+        function resetContact() {
+            document.getElementById("contact").reset(); 
+        }
+
+        function getQuote() {
+            var startID = document.getElementById("startCity").value;
+            var endID = document.getElementById("endCity").value;
+            var distanceID = parseInt(startID) + parseInt(endID);
+            var miles = distance[distanceID];
+
+            if (hazard === true) {
+                rate += 0.25;
+                hazard = "Y";
+            } else {
+                hazard = "N";
+            }
+
+            if (weight < 40000) {
+                if (weight < 10000) {
+                    rate += .25;
+                } else {
+                    rate += .1;
+                }
+            }            
+
+            if (volume < 1000) {
+                rate += .1;
+            }
+
+            var quote = miles * rate;
+            quote = quote.toFixed(2);
+
+            //var orderCode = startID + endID + "D" + miles + "-" + weight + "W" + volume + "V-" + hazard + "$" + quote;
+            
+            if (isNaN(quote)) {
+                document.getElementById("contact").style.display = "none";
+                document.getElementById("quote").style.display = "inline";
+
+                alert("Choose two different cities, please.");
+            } else {
+                document.getElementById("quote").style.display = "none";
+                document.getElementById("contact").style.display = "block";
+
+                alert("The cost is \$" + 
+                Intl.NumberFormat().format(quote) + " to travel " + 
+                Intl.NumberFormat().format(miles) + " miles from " +
+                startCityName + " to " + endCityName + ".");
+                
+                //document.getElementById("orderCode").value = orderCode;                
+            }              
+        }
+    </script>
+    {{> header }}
         <br>
         <div class="jumbotron mx-auto" style="width: 768px; height: 480px;">
             <div class="container">
@@ -83,97 +173,7 @@
             </div>
         </div>
 
-        {{> footer }}
-    <script>
-        var startCityName = "Flagstaff, AZ"; 
-        var endCityName = "Flagstaff, AZ";
-        var weight = 100;
-        var volume = 10;
-        var hazard = false;
-        var distance = {20: 145, 30: 488, 40: 677, 50: 1109, 
-                        11: 145, 31: 355, 41: 821, 51: 1204, 
-                        12: 488, 22: 355, 42: 1078, 52: 1559, 
-                        13: 677, 23: 821, 33: 1078, 53: 600, 
-                        14: 1109, 24: 1204, 34: 1559, 44: 600};
-        var rate = 1;
-        
-
-        function getStartCity(sel) {
-            startCityName = sel.options[sel.selectedIndex].text;
-        }
-
-        function getEndCity(sel) {
-            endCityName = sel.options[sel.selectedIndex].text;
-        }
-
-        function getWeight(sel) {
-            weight = document.getElementById("weight").value;
-        }
-
-        function getVolume(sel) {
-            volume = document.getElementById("volume").value;
-        }
-
-        function getHazard(sel) {
-            hazard = document.getElementById("hazard").checked;
-        }
-   
-        function resetQuote() {
-            document.getElementById("quote").reset(); 
-        }
-
-        function resetContact() {
-            document.getElementById("contact").reset(); 
-        }
-
-        function getQuote() {
-            var startID = document.getElementById("startCity").value;
-            var endID = document.getElementById("endCity").value;
-            var distanceID = parseInt(startID) + parseInt(endID);
-            var miles = distance[distanceID];
-
-            if (hazard === true) {
-                rate += 0.25;
-                hazard = "Y";
-            } else {
-                hazard = "N";
-            }
-
-            if (weight < 10000) {
-                rate += .15;
-            }
-
-            if (weight < 40000) {
-                rate += .1;
-            }
-
-            if (volume < 1000) {
-                rate += .1;
-            }
-
-            var quote = miles * rate;
-            quote = quote.toFixed(2);
-
-            //var orderCode = startID + endID + "D" + miles + "-" + weight + "W" + volume + "V-" + hazard + "$" + quote;
-            
-            if (isNaN(quote)) {
-                document.getElementById("contact").style.display = "none";
-                document.getElementById("quote").style.display = "inline";
-
-                alert("Choose two different cities, please.");
-            } else {
-                document.getElementById("quote").style.display = "none";
-                document.getElementById("contact").style.display = "block";
-
-                alert("The cost is \$" + 
-                Intl.NumberFormat().format(quote) + " to travel " + 
-                Intl.NumberFormat().format(miles) + " miles from " +
-                startCityName + " to " + endCityName + ".");
-                
-                //document.getElementById("orderCode").value = orderCode;                
-            }              
-        }
-    </script>
+    {{> footer }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
