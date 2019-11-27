@@ -84,7 +84,7 @@
         </div>
 
         {{> footer }}
-            <script>
+    <script>
         var startCityName = "Flagstaff, AZ"; 
         var endCityName = "Flagstaff, AZ";
         var weight = 100;
@@ -132,18 +132,18 @@
             var distanceID = parseInt(startID) + parseInt(endID);
             var miles = distance[distanceID];
 
-            if (hazard == true) {
+            if (hazard === true) {
                 rate += 0.25;
                 hazard = "Y";
             } else {
                 hazard = "N";
             }
 
-            if (weight > 10000) {
+            if (weight < 10000) {
                 rate += .15;
             }
 
-            if (weight > 40000) {
+            if (weight < 40000) {
                 rate += .1;
             }
 
