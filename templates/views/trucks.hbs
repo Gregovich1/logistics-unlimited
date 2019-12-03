@@ -10,10 +10,6 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="/js/vendor/aws-cognito-sdk.min.js"></script>
-        <script src="/js/vendor/amazon-cognito-identity.min.js"></script>
-        <script src="/js/config.js"></script>
-        <script src="/js/cognito-auth.js"></script>
         <style>
             th, td, p, input {
                 font:14px Verdana;
@@ -22,15 +18,17 @@
             {
                 border: solid 1px #DDD;
                 border-collapse: collapse;
-                padding: 2px 3px;
+                padding: 5px 10px;
                 text-align: center;
             }
             th {
                 font-weight:bold;
             }
-    </style>
-
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+            input[id^="truck"] {
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+        </style>
     </head>
     <body>
         {{> header }}
@@ -47,27 +45,36 @@
             <div id="trucks">
             </div>
         </div>
+        <div class="row d-flex justify-content-center">
+            <div id="message">
+            </div>
+        </div>
         <div class="container">
-            <div class="row">
-                <div class "col-lg-4">
-                    <form id="add" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 justify-content-center">
+                    <form id="add" style="background-color: lightgray; margin: 50px 10px; padding: 5px; text-align: center;">
                         <h4>Add a truck to our inventory:</h4>
                         <label for="truckYearInput">Truck Year</label>
                         <input id="truckYearInput" required name="truckYearInput">
+                        <br>
                         <label for="truckMakeInput">Truck Make</label>
                         <input id="truckMakeInput" required name="truckMakeInput">
+                        <br>
                         <label for="truckModelInput">Truck Model</label>
                         <input id="truckModelInput" required name="truckModelInput">
+                        <br>
                         <label for="truckPlateInput">Truck License Plate</label>
                         <input id="truckPlateInput" required name="truckPlateInput">
+                        <br>
                         <button>Add a Truck</button>
                     </form>
                 </div>
-                <div class="col-lg-4">
-                    <form id="delete" style="background-color: lightgray; margin: 50px 10px; padding: 5px;">
+                <div class="col-lg-6 justify-content-center">
+                    <form id="delete" style="background-color: lightgray; margin: 50px 10px; padding: 5px; text-align: center;">
                         <h4>Delete a truck from our inventory:</h4>
                         <label for="truckIDInput">Truck ID</label>
                         <input id="truckIDInput" required name="truckIDInput">
+                        <br>
                         <button>Delete Truck</button>
                     </form>
                 </div>
@@ -83,13 +90,14 @@
             const $trucks = document.getElementById('trucks')
             const $add = document.getElementById('add')
             const $delete = document.getElementById('delete')
+            const $message = document.getElementById('message')
             window.addEventListener('DOMContentLoaded', (e) => {
                 e.preventDefault()
                 $trucks.removeChild($trucks.firstChild)
                 fetch('/api/trucks').then((response) => {
                     response.json().then((data) => {
                         if (data.error) {
-                            $trucks.appendChild(createMessage('No results, please try a different search term.'))
+                            $message.appendChild(createMessage('Please try again later.'))
                         } else {
                             $trucks.appendChild(createTable(data))
                         }
@@ -98,12 +106,19 @@
             })
             $search.addEventListener('submit', (e) => {
                 e.preventDefault()
-                $trucks.removeChild($trucks.firstChild)
+                if ($trucks.firstChild) {
+                    $trucks.removeChild($trucks.firstChild)
+                }
+                if ($message.firstChild) {
+                    $message.removeChild($message.firstChild)
+                }
                 const requested = $searchInput.value
                 fetch('/api/trucks?search=' + requested).then((response) => {
                     response.json().then((data) => {
                         if (data.error) {
-                            $trucks.appendChild(createMessage('No results, please try a different search term.'))
+                            $message.appendChild(createMessage('No results, please try a different search term.'))
+                        } else if (data.length === 0) {
+                            $message.appendChild(createMessage('No results, please try a different search term.'))
                         } else {
                             $trucks.appendChild(createTable(data))
                         }
@@ -112,7 +127,12 @@
             })
             $add.addEventListener('submit', (e) => {
                 e.preventDefault()
-                $trucks.removeChild($trucks.firstChild)
+                if ($trucks.firstChild) {
+                    $trucks.removeChild($trucks.firstChild)
+                }
+                if ($message.firstChild) {
+                    $message.removeChild($message.firstChild)
+                }
                 const truckData = {
                     truck_year: document.getElementById('truckYearInput').value,
                     truck_make: document.getElementById('truckMakeInput').value,
@@ -127,16 +147,25 @@
                     body: JSON.stringify(truckData)
                 }).then((response) => {
                     if (response.error){
-                        $trucks.appendChild(createMessage('Failed to add a truck. Try again.'))
+                        $message.appendChild(createMessage('Failed to add a truck. Try again.'))
                     } else {
-                        $trucks.appendChild(createMessage('Success! Use a search to confirm.'))
+                        $message.appendChild(createMessage('Success! Use a search to confirm.'))
                     }
                 })
             })
             $delete.addEventListener('submit', (e) => {
                 e.preventDefault()
-                $trucks.removeChild($trucks.firstChild)
+                if ($trucks.firstChild) {
+                    $trucks.removeChild($trucks.firstChild)
+                }
+                if ($message.firstChild) {
+                    $message.removeChild($message.firstChild)
+                }
                 const id = document.getElementById('truckIDInput').value
+                const answer = window.confirm(`Are you sure you want to delete Truck ${id} from our inventory?`)
+                if (!answer) {
+                    return
+                }
                 fetch(`/api/trucks/${id}`, {
                     method: 'DELETE'
                 }).then((response) => {
@@ -149,6 +178,7 @@
             })
             const createTable = (data) => {
                 let col = []
+                const colNames = ['ID', 'Year', 'Make', 'Model', 'License Plate']
                 for (let i = 0; i < data.length; i++) {
                     for (let key in data[i]) {
                         if (col.indexOf(key) === -1) {
@@ -160,7 +190,7 @@
                 let tr = table.insertRow(-1)                 // TABLE ROW.
                 for (let i = 0; i < col.length - 1; i++) {
                     let th = document.createElement("th")     // TABLE HEADER.
-                    th.innerHTML = col[i]
+                    th.innerHTML = colNames[i]
                     tr.appendChild(th)
                 }
                 for (let i = 0; i < data.length; i++) {
