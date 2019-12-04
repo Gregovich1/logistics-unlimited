@@ -6,31 +6,29 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     </head>
     <body>
-        <div class="container main-secction">
-        <div class="row">
+        {{>header }}
+        <div class="container main-secction" style="margin-top: 100px;">
             <div class="col-md-12 col-sm-12 col-xs-12 image-section">
-                {{>header}}
-            </div>
-            <div class="row user-left-part">
-                <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
-                    <div class="row ">
-                        <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
-                            <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle">
-                        </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
-                            <a id="btn-intranet" href="/intranet" class="btn btn-primary btn-lg">Intranet</a> 
-                            <a id="btn-trucks" href="/trucks" class="btn btn-primary btn-lg">Trucks</a>                              
-                        </div>
-                        <div class="row user-detail-row">
-                            <div class="col-md-12 col-sm-12 user-detail-section2 pull-left">
-                                <div class="border"></div>
+                <div class="row user-left-part">
+                    <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
+                        <div class="row ">
+                            <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
+                                <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle">
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
+                                <a id="btn-intranet" href="/intranet" class="btn btn-primary btn-lg">Intranet</a> 
+                                <a id="btn-trucks" href="/trucks" class="btn btn-primary btn-lg">Trucks</a>                              
+                            </div>
+                            <div class="row user-detail-row">
+                                <div class="col-md-12 col-sm-12 user-detail-section2 pull-left">
+                                    <div class="border">
+                                    </div>
                                 <p></p>
                                 <span></span>
-                            </div>                           
+                                </div>                           
+                            </div> 
                         </div>
-                       
                     </div>
-                </div>
                 <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
                     <div class="row profile-right-section-row">
                         <div class="col-md-12 profile-header">
@@ -162,13 +160,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="http://camaradecomerciozn.com/">
-                                            <div class="col-md-12 image-right">
-                                                <img src="/img/logo.png" style="max-width:250px; height:auto;">
-                                            </div>
-                                        </a>
-                                        <div class="col-md-12 image-right-detail-section2">
+                                            <a href="http://camaradecomerciozn.com/">
+                                                <div class="col-md-12 image-right">
+                                                    <img src="/img/logo.png" style="max-width:250px; height:auto;">
+                                                </div>
+                                            </a>
+                                            <div class="col-md-12 image-right-detail-section2">
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +177,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
