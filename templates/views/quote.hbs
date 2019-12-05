@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+<!-- Begin Quote Page -->
     <head>
         <title>Logistics Unlimited</title>
         {{!-- <link rel="icon" href=""> --}}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
+<!-- Begin Quote System by selecting the following below-->
         {{> header }}
         <br><br><br>
             <script>
@@ -21,7 +23,7 @@
                         14: 1109, 24: 1204, 34: 1559, 44: 600};
         var rate = 1;
         
-
+//Setting city and all other variables
         function getStartCity(sel) {
             startCityName = sel.options[sel.selectedIndex].text;
         }
@@ -49,7 +51,7 @@
         function resetContact() {
             document.getElementById("contact").reset(); 
         }
-
+//Getting the actual quote
         function getQuote() {
             var startID = document.getElementById("startCity").value;
             var endID = document.getElementById("endCity").value;
@@ -94,10 +96,11 @@
                 Intl.NumberFormat().format(miles) + " miles from " +
                 startCityName + " to " + endCityName + ".");
                 
-                //document.getElementById("orderCode").value = orderCode;                
+                    
             }              
         }
     </script>
+<!-- Styling of the Quote Page -->
         <div class="jumbotron mx-auto" style="width: 768px; height: 480px;">
             <div class="container">
                 <form id="quote">
@@ -165,7 +168,6 @@
                     <div class="form-group-row ml-5">
                         <label class="mt-1">Comment</label>
                         <textarea type="comment" class="form-control col-sm-12" id="comment" placeholder="Write comments here..." required></textarea>
-                        <!-- <input type="hidden" name="orderCode" value=""> -->
                     </div>
                     <button class="btn btn-primary ml-5 mt-3" href="#" onclick="">Submit</button>
                     <button class="btn btn-secondary ml-5 mt-3" type="button" id="resetFormButton" onclick="resetContact()">Reset</button>
@@ -177,4 +179,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
+<!-- End of Quote Page -->
 </html>
