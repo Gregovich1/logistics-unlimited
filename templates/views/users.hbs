@@ -16,8 +16,6 @@
         <script src="/js/vendor/amazon-cognito-identity.min.js"></script>
         <script src="/js/config.js"></script>
         <script src="/js/cognito-auth.js"></script>
-
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     </head>
     <body>
          {{> header }}
@@ -67,6 +65,8 @@
         {{> footer }}
     </body>
     <script>
+        /* Single function to handle sign in attempts. If the username and password are stored in AWS Cognito,
+        The user's data are fetched from our API. The user is then redirected to the Profile page. */
         function signIn() {
             const authenticationData = {
                 Username : document.getElementById("inputUsername").value,
@@ -74,13 +74,13 @@
         }
         const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData)
         const poolData = {
-            UserPoolId : _config.cognito.userPoolId, // Your user pool id here
-            ClientId : _config.cognito.userPoolClientId, // Your client id here
+            UserPoolId : _config.cognito.userPoolId,
+            ClientId : _config.cognito.userPoolClientId,
         }
         const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
         const userData = {
             Username : document.getElementById("inputUsername").value,
-            Pool : userPool,
+            Pool : userPool
         }
         const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData)
         cognitoUser.authenticateUser(authenticationDetails, {
