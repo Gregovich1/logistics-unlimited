@@ -7,159 +7,156 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="/js/vendor/jquery-3.1.0.js"></script>
-        <script src="/js/vendor/bootstrap.min.js"></script>
-        <script src="/js/vendor/aws-cognito-sdk.min.js"></script>
-        <script src="/js/vendor/amazon-cognito-identity.min.js"></script>
-        <script src="/js/config.js"></script>
-        <script src="/js/cognito-auth.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- CSS Styles -->        
+    <style>
+        .faqHeader {
+            font-size: 27px;
+            margin: 20px;
+        }
+
+        .panel-heading [data-toggle="collapse"]:after {
+            font-family: 'Glyphicons Halflings';
+            content: "+"; /* "play" icon */
+            float: right;
+            color: #F58723;
+            font-size: 21px;
+            line-height: 22px;
+            /* rotate "play" icon from > (right arrow) to down arrow */
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+    </style>
+<!-- End of CSS styles -->
+    
     </head>
 <!-- Begin the accordion to hold all the FAQ questions -->
     <body>
-            {{> header }}
-            <div class="row">
-                <p></p>
-            </div>
-            <div class="row">
-                <p></p>
-            </div>
-            <div class="row">
-                <p></p>
-            </div>
+        {{> header }}
+        <div class="row">
+            <p></p>
+        </div>
+        <div class="row">
+            <p></p>
+        </div>
+        <div class="row">
+            <p></p>
         </div>
         <div class="container">
-    <br />
-    <br />
-    
-
-    <div class="panel-group" id="accordion">
-        <div class="faqHeader">General questions</div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Do You Ship Outside of Arizona?</a>
-                </h4>
+        <br />
+        <br />
+            <div class="panel-group" id="accordion">
+            <div class="faqHeader">
+                General questions
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    We are now offering delivery to all 50 states. The shipping fees will vary, as will the delivery time. You can rest assured that we will get your order to you as quickly as possible.
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Do You Ship Outside of Arizona?</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        We are now offering delivery to all 50 states. The shipping fees will vary, as will the delivery time. You can rest assured that we will get your order to you as quickly as possible.
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Do You Ship to Canada?</a>
-                </h4>
-            </div>
-            <div id="collapseTen" class="panel-collapse collapse">
-                <div class="panel-body">
-                Our customers ordering from Canada are able to make a purchase and request shipping through our website. The order will be processed in U.S. dollars, so you should be aware of the difference in cost after the exchange rate. Orders to Canada are not eligible for free shipping, due to the additional charges related to international shipments. Additionally, you should expect duty charges from your government.
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Do You Ship to Canada?</a>
+                    </h4>
+                </div>
+                <div id="collapseTen" class="panel-collapse collapse">
+                    <div class="panel-body">
+                    Our customers ordering from Canada are able to make a purchase and request shipping through our website. The order will be processed in U.S. dollars, so you should be aware of the difference in cost after the exchange rate. Orders to Canada are not eligible for free shipping, due to the additional charges related to international shipments. Additionally, you should expect duty charges from your government.
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">What kind of deliveries do you specialize in?</a>
-                </h4>
+                    </h4>
+                </div>
+                <div id="collapseEleven" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        We can handle anything from legal documents, to freight and anything in between. You need it delivered, we can make it happen, in an efficient and dependable way all while offering excellent customer service.
+                    </div>
+                </div>
             </div>
-            <div id="collapseEleven" class="panel-collapse collapse">
-                <div class="panel-body">
-                    We can handle anything from legal documents, to freight and anything in between. You need it delivered, we can make it happen, in an efficient and dependable way all while offering excellent customer service.
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">What is the most weight/pallets that you can handle?</a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        We have straight trucks with lift gates that regularly handle 6 to 12 pallets with a weight capacity of 3500 up to 8500 lbs. However, please consider that logistically, more weight takes more planning and equipment. Please call as soon as you can for larger loads so we can find the mode of transportation needed for your delivery.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">What type of services do you provide?</a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        We can design the coverage, you need. Basic services range from immediate, to a number of hours, all the way to next day service. We also provide sweep or routed coverage, plus large freight loads. The service choices are up to you and your company needs!
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">What type vehicles does Logistics Unlimited have?</a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Logistics Unlimited can handle your heavy loads, from Vans to Straight trucks with lift gates. Logistics Unlimited provides the resources for your company’s freight needs of all sizes. Let us help you offer exceptional logistical service to your company and your clients.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Do you provide insurance on packages /boxes being sent out?</a>
+                    </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Yes, all packages are covered by freight insurance and bonded.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">What type billing frequency do you provide?</a>
+                    </h4>
+                </div>
+                <div id="collapseEight" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        This is up to you. Credit card or set up an account with us, to be billed according to your company’s needs! We will walk you through the steps. We can help you get started. Call us today!
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">What is the most weight/pallets that you can handle?</a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                    We have straight trucks with lift gates that regularly handle 6 to 12 pallets with a weight capacity of 3500 up to 8500 lbs. However, please consider that logistically, more weight takes more planning and equipment. Please call as soon as you can for larger loads so we can find the mode of transportation needed for your delivery.
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">What type of services do you provide?</a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse">
-                <div class="panel-body">
-                    We can design the coverage, you need. Basic services range from immediate, to a number of hours, all the way to next day service. We also provide sweep or routed coverage, plus large freight loads. The service choices are up to you and your company needs!
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">What type vehicles does Logistics Unlimited have?</a>
-                </h4>
-            </div>
-            <div id="collapseFive" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Logistics Unlimited can handle your heavy loads, from Vans to Straight trucks with lift gates. Logistics Unlimited provides the resources for your company’s freight needs of all sizes. Let us help you offer exceptional logistical service to your company and your clients.
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Do you provide insurance on packages /boxes being sent out?</a>
-                </h4>
-            </div>
-            <div id="collapseSix" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Yes, all packages are covered by freight insurance and bonded.
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">What type billing frequency do you provide?
-            </div>
-            <div id="collapseEight" class="panel-collapse collapse">
-                <div class="panel-body">
-                    This is up to you. Credit card or set up an account with us, to be billed according to your company’s needs! We will walk you through the steps. We can help you get started. Call us today!
-                </div>
-            </div>
-        </div>
+    </div>
+    {{>footer}}
 <!-- End accordion of FAQ page -->
 
-<!-- CSS Styles -->        
-<style>
-    .faqHeader {
-        font-size: 27px;
-        margin: 20px;
-    }
 
-    .panel-heading [data-toggle="collapse"]:after {
-        font-family: 'Glyphicons Halflings';
-        content: "+"; /* "play" icon */
-        float: right;
-        color: #F58723;
-        font-size: 21px;
-        line-height: 22px;
-        /* rotate "play" icon from > (right arrow) to down arrow */
-        -webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-    }
-</style>
-<!-- End of CSS styles -->
-
-        <script src="/public/js/vendor/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    {{>footer}}
     </body>   
 <!-- End of FAQ -->
 </html>
